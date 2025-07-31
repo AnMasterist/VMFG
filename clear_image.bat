@@ -1,2 +1,2 @@
 @echo off
-cmd /k ".\.venv\Scripts\activate & python image_gen.py"
+cmd /k ".\bin\Scripts\activate & python image_gen.py"
