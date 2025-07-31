@@ -25,6 +25,7 @@ def map_creation(*args):
             map_solid = vmf_func.vmf_map_solid(map_readed)
             map_entity = vmf_func.vmf_map_entity(map_readed)
             map_solid = vmf_func.vmf_coordinates_set(map_solid, i[1])
+            map_entity = vmf_func.vmf_coordinates_set(map_entity, i[1])
             map_entity = vmf_func.vmf_coordinates_set_point(map_entity, i[1])
             map_result.append(map_solid)
             map_result.append(map_entity)

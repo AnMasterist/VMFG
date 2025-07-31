@@ -84,12 +84,13 @@ def vmf_coordinates_set_point(a, b):
         sub_cor_1 = point[point.index('"origin"') + 1]
         sub_cor_2 = point[point.index('"origin"') + 2]
         sub_cor_3 = point[point.index('"origin"') + 3]
-        result.append(" ".join([cor_1, cor_2, cor_3]))
-        sub_result.append(" ".join([sub_cor_1, sub_cor_2, sub_cor_3]))
+        result.append('"origin" ' + " ".join([cor_1, cor_2, cor_3]))
+        sub_result.append('"origin" ' + " ".join([sub_cor_1, sub_cor_2, sub_cor_3]))
         point.remove('"origin"')
     for i, v in enumerate(sub_result):
         # joins = joins.replace(v, result[i])
-        joins = joins[0:joins.find(v) + 1 - len(joins)] + joins[joins.find(v) + 1:].replace(v, result[i])
+        joins = joins.replace(v, result[i])
+        print(joins)
     return joins.split()
 def vmf_coordinates_get_pos(a, b):
     point = a
