@@ -90,7 +90,7 @@ for i, v in enumerate(map_rooms_num):
             if check:
                 room.append(val[0])
     chunk_pos_new = chunk_pos(map_rooms_start[i][0], map_rooms_start[i][1], float(cfg["CONFIG_VAR"]['chunk_max']), float(cfg["CONFIG_VAR"]['chunk_max']))
-    map_rooms.append((random.choice(room), new_to_old_coord_system(chunk_pos_new[0], chunk_pos_new[1], float(cfg["CONFIG_VAR"]['start_pos_1']), float(cfg["CONFIG_VAR"]['start_pos_2']), int(cfg["CONFIG_VAR"]['height']))))
+    map_rooms.append((random.choice(room), new_to_old_coord_system(chunk_pos_new[0], chunk_pos_new[1], float(-16384), float(16384), int(cfg["CONFIG_VAR"]['height']))))
     # for i in range(len(map_rooms_start)):
     #     for val in v[1]:
     #         if map_rooms_start
