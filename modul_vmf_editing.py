@@ -90,7 +90,6 @@ def vmf_coordinates_set_point(a, b):
     for i, v in enumerate(sub_result):
         # joins = joins.replace(v, result[i])
         joins = joins.replace(v, result[i])
-        print(joins)
     return joins.split()
 def vmf_coordinates_get_pos(a, b):
     point = a

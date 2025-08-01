@@ -17,7 +17,7 @@ def chunk_pos(a, b, c, d):
     return (c/2) + (c * a), (c/2) + (c * b), d
 def min_max_chunk(a, b):
     return 0, (b/a)
-def map_creation(*args):
+def map_creation(num_copy, *args):
     map_result = []
     for i in args:
         with open(i[0], "r") as map_read:
@@ -27,6 +27,13 @@ def map_creation(*args):
             map_solid = vmf_func.vmf_coordinates_set(map_solid, i[1])
             map_entity = vmf_func.vmf_coordinates_set(map_entity, i[1])
             map_entity = vmf_func.vmf_coordinates_set_point(map_entity, i[1])
+            try:
+                map_entity_targetname = map_entity[map_entity.index('"targetname"') + 1]
+                map_entity = " ".join(map_entity).replace(map_entity_targetname[1:-1], map_entity_targetname[1:-1] + str(num_copy) + 'copy')
+                map_entity = map_entity.split()
+                print(map_entity)
+            except:
+                print("No targetname")
             map_result.append(map_solid)
             map_result.append(map_entity)
     return map_result
@@ -99,8 +106,10 @@ for i, v in enumerate(map_rooms_num):
     #     print(next(num_1))
     # chunk_pos_new = chunk_pos(v[0], v[1], 1024, 1024)
     # map_rooms.append(("maps/vmfg_chunk.vmf", new_to_old_coord_system(chunk_pos_new[0], chunk_pos_new[1], -16384, 16384, 0)))
+copy = 1
 for i in map_rooms:
-    map_result_write.extend(map_creation(i))
+    map_result_write.extend(map_creation(copy, i))
+    copy += 1
 with open("map_result/vmfg_map_result_1.vmf", "w") as map_write:
     map_write.write(map_creation_result("maps/vmfg_base.vmf", map_result_write))
 
