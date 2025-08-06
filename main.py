@@ -55,6 +55,7 @@ def num_equal(a, b):
 cfg = configparser.ConfigParser()
 cfg.read("config_vmfg.cfg")
 map_rooms_start = []
+map_rooms_start_color = []
 map_rooms_num = []
 map_rooms = []
 map_result_write = []
@@ -67,10 +68,12 @@ for i in range(0, size1):
     for v in range(0, size2):
         if img.getpixel((i, v)) == (0, 0, 0, 255):
             map_rooms_start.append((i, v))
+        elif img.getpixel((i, v)) == (int(cfg["CONFIG_VAR"]['map_color_r']), int(cfg["CONFIG_VAR"]['map_color_g']), int(cfg["CONFIG_VAR"]['map_color_b']), 255):
+            map_rooms_start_color.append((i, v))
 
 img.close()
 
-print(cfg.items("MAPS"))
+print(cfg.items("MAPS_COLOR"))
 
 for i in cfg.items("MAPS"):
     list_1 = []
@@ -109,6 +112,10 @@ for i, v in enumerate(map_rooms_num):
 copy = 1
 for i in map_rooms:
     map_result_write.extend(map_creation(copy, i))
+    copy += 1
+for i, v in enumerate(cfg.items("MAPS_COLOR")):
+    coord = chunk_pos(map_rooms_start_color[i][0], map_rooms_start_color[i][1], float(cfg["CONFIG_VAR"]['chunk_max']), float(cfg["CONFIG_VAR"]['chunk_max']))
+    map_result_write.extend(map_creation(copy, [v[1], new_to_old_coord_system(coord[0], coord[1], float(-16384), float(16384), int(cfg["CONFIG_VAR"]['height']))]))
     copy += 1
 with open("map_result/vmfg_map_result_1.vmf", "w") as map_write:
     map_write.write(map_creation_result("maps/vmfg_base.vmf", map_result_write))
