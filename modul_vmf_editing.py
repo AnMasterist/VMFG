@@ -45,7 +45,7 @@ def vmf_coordinates_set(a, b):
     for i in range(0, solid.count('"plane"')):
         # print(solid.index('"material"', ind))
         # print(solid.index('"plane"', ind))
-        table = solid[solid.index('"plane"') + 1:solid.index('"material"')]
+        table = solid[solid.index('"plane"') + 1:solid.index('"plane"') + 10]
         sub_result.append(" ".join(table))
         table[0] = table[0].replace('"(', "")
         table[3] = table[3].replace('(', "")
